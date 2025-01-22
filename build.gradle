@@ -1,0 +1,57 @@
+plugins {
+	id 'fabric-loom' version '0.12-SNAPSHOT'
+	id 'java'
+}
+
+group = 'net.hellonearth311'
+version = '1.0.0'
+archivesBaseName = 'powdermanmod'
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+repositories {
+	mavenCentral()
+	maven { url = uri('https://maven.fabricmc.net') }
+}
+
+dependencies {
+	// Minecraft
+	minecraft "com.mojang:minecraft:1.20.4"
+
+	// Yarn mappings
+	mappings "net.fabricmc:yarn:1.20.4+build.5:v2"
+
+	// Loom for compiling and creating the mod
+	modCompile "net.fabricmc:fabric-loom:0.12-SNAPSHOT"
+
+	// Fabric API
+	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	// Optional: For testing your mod
+	testCompile "net.fabricmc:fabric-loader:0.14.11"
+}
+
+loom {
+	accessWidenerPath = project.file("src/main/resources/${archivesBaseName}.accesswidener")
+}
+
+task generateSources {
+	doLast {
+		println "Generating sources for mod"
+	}
+}
+
+task buildJar(type: Jar) {
+	archiveBaseName.set("${archivesBaseName}")
+	from sourceSets.main.output
+	manifest {
+		attributes(
+				'Fabric-Loom-Version': '0.12-SNAPSHOT',
+				'Fabric-API-Version': '1.0',
+				'Mixin-Configs': 'powdermanmod.mixins.json',
+				'Main-Class': 'net.hellonearth311.powdermanmod.PowdermanMod'
+		)
+	}
+	from 'src/main/resources'
+}

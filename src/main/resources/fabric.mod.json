@@ -1,0 +1,29 @@
+{
+	"schemaVersion": 1,
+	"id": "powdermanmod",
+	"version": "1.0.0",
+	"name": "Powderman Mod",
+	"description": "A mod that adds a villager selling fireworks and TNT.",
+	"authors": [
+		"hellonearth311"
+	],
+	"contact": {
+		"homepage": "https://yourwebsite.com",
+		"sources": "https://github.com/yourgithub/powdermanmod"
+	},
+	"license": "MIT",
+	"icon": "assets/powdermanmod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.hellonearth311.powdermanmod.PowdermanMod"
+		],
+		"client": [
+			"net.hellonearth311.powdermanmod.client.ClientMod"
+		]
+	},
+	"depends": {
+		"fabric-api": "*",
+		"minecraft": "1.20.4"
+	}
+}
